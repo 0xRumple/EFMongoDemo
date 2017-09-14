@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using EFMongoDemo.Web.Models;
+using EFMongoDemo.Core.Models;
 
 namespace EFMongoDemo.Web.Services
 {

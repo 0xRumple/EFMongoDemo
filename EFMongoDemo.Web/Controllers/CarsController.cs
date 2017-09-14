@@ -1,27 +1,27 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using EFMongoDemo.Web.Data;
-using EFMongoDemo.Web.Models;
+﻿using System.Threading.Tasks;
 using EFMongoDemo.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MongoDB.Bson;
+using EFMongoDemo.Data;
+using EFMongoDemo.Data.Extensions;
+using EFMongoDemo.Data.Services;
 
 namespace EFMongoDemo.Web.Controllers
 {
     public class CarsController : Controller
     {
-        private readonly MyAppDbContext _context;
+	    private readonly CarsRepository _carRepo;
 
-        public CarsController(MyAppDbContext context)
+	    public CarsController(EFMongoDemoDbContext context)
         {
-            _context = context;
+			_carRepo = new CarsRepository(context);
         }
 
         // GET: Cars
         public async Task<IActionResult> Index()
         {
-			var cars = await _context.Cars.ToListAsync();
+			var cars = await _carRepo.GetAll();
 
 	        //var owner = cars[0].Owner;
 
@@ -37,8 +37,8 @@ namespace EFMongoDemo.Web.Controllers
                 return NotFound();
             }
 
-            var car = await _context.Cars
-                .SingleOrDefaultAsync(m => m.Id == id);
+	        var car = await _carRepo.GetById(id);
+
             if (car == null)
             {
                 return NotFound();
@@ -63,8 +63,7 @@ namespace EFMongoDemo.Web.Controllers
             if (ModelState.IsValid)
             {
 	            var car = carViewModel.ToModel();
-                _context.Add(car);
-                await _context.SaveChangesAsync();
+                await _carRepo.Add(car);
                 return RedirectToAction(nameof(Index));
             }
             return View(carViewModel);
@@ -73,7 +72,7 @@ namespace EFMongoDemo.Web.Controllers
         // GET: Cars/Edit/5
         public async Task<IActionResult> Edit(ObjectId id)
         {
-	        var car = await _context.Cars.SingleOrDefaultAsync(m => m.Id == id);
+	        var car = await _carRepo.GetById(id);
             if (car == null)
             {
                 return NotFound();
@@ -86,23 +85,25 @@ namespace EFMongoDemo.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(ObjectId id, [Bind("Id,Model,Price")] Car car)
+        public async Task<IActionResult> Edit(ObjectId id, CarViewModel carViewModel)
         {
-            if (id != car.Id)
-            {
-                return NotFound();
-            }
+            //if (id != car.Id)
+            //{
+            //    return NotFound();
+            //}
 
             if (ModelState.IsValid)
             {
+	            var car = carViewModel.ToModel();
+	            car.Id = car.Id.Create(id);
+
                 try
                 {
-                    _context.Update(car);
-                    await _context.SaveChangesAsync();
+                    await _carRepo.Update(car);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CarExists(car.Id))
+                    if (!await _carRepo.EntityExists(car.Id))
                     {
                         return NotFound();
                     }
@@ -113,14 +114,14 @@ namespace EFMongoDemo.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(car);
+
+            return View(carViewModel);
         }
 
         // GET: Cars/Delete/5
         public async Task<IActionResult> Delete(ObjectId id)
         {
-	        var car = await _context.Cars
-                .SingleOrDefaultAsync(m => m.Id == id);
+	        var car = await _carRepo.GetById(id);
             if (car == null)
             {
                 return NotFound();
@@ -134,15 +135,8 @@ namespace EFMongoDemo.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(ObjectId id)
         {
-            var car = await _context.Cars.SingleOrDefaultAsync(m => m.Id == id);
-            _context.Cars.Remove(car);
-            await _context.SaveChangesAsync();
+	        await _carRepo.Delete(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool CarExists(ObjectId id)
-        {
-            return _context.Cars.Any(e => e.Id == id);
         }
     }
 }

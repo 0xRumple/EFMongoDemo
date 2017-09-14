@@ -1,15 +1,13 @@
-﻿using MongoDB.Bson;
-
-namespace EFMongoDemo.Web.Models
+﻿namespace EFMongoDemo.Core.Models
 {
 	public class Employee : IOwner
 	{
 		public Employee()
 		{
-			Id = ObjectId.GenerateNewId();
+			//Id = ObjectId.GenerateNewId();
 			Name = "";
 		}
-		public ObjectId Id { get; set; }
+		public string Id { get; set; }
 		public string Name { get; set; }
 
 

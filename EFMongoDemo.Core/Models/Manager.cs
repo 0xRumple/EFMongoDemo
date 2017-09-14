@@ -1,10 +1,10 @@
-﻿using MongoDB.Bson;
+﻿using EFMongoDemo.Core.Models.Entity;
 
-namespace EFMongoDemo.Web.Models
+namespace EFMongoDemo.Core.Models
 {
     public class Manager : IOwner
     {
-	    public ObjectId Id { get; set; }
+	    public string Id { get; set; }
 	    public string Name { get; set; }
 
 	    public string GetTypeString()

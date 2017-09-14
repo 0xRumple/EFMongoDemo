@@ -1,4 +1,4 @@
-﻿using EFMongoDemo.Web.Models;
+﻿using EFMongoDemo.Core.Models;
 
 namespace EFMongoDemo.Web.ViewModels
 {

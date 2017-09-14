@@ -4,12 +4,11 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <UserSecretsId>aspnet-EFMongoDemo-8BD655EB-6534-4EE6-A79C-B8D6B4CF4E54</UserSecretsId>
     <RootNamespace>EFMongoDemo.Web</RootNamespace>
-    <AssemblyName>EFMongoDemo</AssemblyName>
+    <AssemblyName>EFMongoDemo.Web</AssemblyName>
   </PropertyGroup>
 
 
   <ItemGroup>
-    <PackageReference Include="Blueshift.EntityFrameworkCore.MongoDB" Version="2.0.0-preview-t0050c6393" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" PrivateAssets="All" />
@@ -19,6 +18,11 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EFMongoDemo.Core\EFMongoDemo.Core.csproj" />
+    <ProjectReference Include="..\EFMongoDemo.Data\EFMongoDemo.Data.csproj" />
   </ItemGroup>
 
 </Project>

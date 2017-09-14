@@ -1,4 +1,4 @@
-﻿using EFMongoDemo.Web.Data;
+﻿using EFMongoDemo.Data;
 using EFMongoDemo.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -22,7 +22,7 @@ namespace EFMongoDemo.Web
         {
 	        var connectionString = Configuration.GetConnectionString("DefaultConnection");
 
-			services.AddDbContext<MyAppDbContext>(options => options.UseMongoDb(connectionString));
+			services.AddDbContext<EFMongoDemoDbContext>(options => options.UseMongoDb(connectionString));
 
 	        services
 		        .AddMvc()

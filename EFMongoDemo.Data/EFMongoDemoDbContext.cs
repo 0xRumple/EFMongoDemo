@@ -1,16 +1,15 @@
 ﻿using Blueshift.EntityFrameworkCore.MongoDB.Annotations;
-using EFMongoDemo.Web.Models;
+using EFMongoDemo.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
-using EFMongoDemo.Web.ViewModels;
 
-namespace EFMongoDemo.Web.Data
+namespace EFMongoDemo.Data
 {
 	[MongoDatabase("carsDb")]
-	public class MyAppDbContext : DbContext
+	public class EFMongoDemoDbContext : DbContext
 	{
-		public MyAppDbContext(DbContextOptions<MyAppDbContext> options)
-			: base(options)
+		public EFMongoDemoDbContext(DbContextOptions<EFMongoDemoDbContext> options)
+			: base((DbContextOptions) options)
 		{
 		}
 
@@ -45,6 +44,5 @@ namespace EFMongoDemo.Web.Data
 
 		public DbSet<Employee> Owners { get; set; }
 
-		public DbSet<OwnerUpdateViewModel> OwnerUpdateViewModel { get; set; }
 	}
 }
