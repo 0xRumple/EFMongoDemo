@@ -13,9 +13,9 @@
         <form asp-action="Update">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="OwnerType" class="control-label"></label>
-                <input asp-for="OwnerType" class="form-control" />
-                <span asp-validation-for="OwnerType" class="text-danger"></span>
+                <label asp-for="OwnerTypeString" class="control-label"></label>
+                <select asp-for="OwnerTypeString" asp-items="@Model.OwnerType" class="form-control"></select>
+                <span asp-validation-for="OwnerTypeString" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="OwnerName" class="control-label"></label>

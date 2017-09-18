@@ -25,9 +25,8 @@ namespace EFMongoDemo.Web
 			services.AddDbContext<EFMongoDemoDbContext>(options => options.UseMongoDb(connectionString));
 
 	        services
-		        .AddMvc()
-		        .AddJsonOptions(options => options.SerializerSettings.Converters.Add(new MongoDbObjectIdConverter()));
-
+		        .AddMvc(options => options.ModelBinderProviders.Insert(0, new ObjectIdBinderProvider()))
+		        .AddJsonOptions(options => options.SerializerSettings.Converters.Add(new ObjectIdJsonConverter()));
 
 			//services.AddIdentity<ApplicationUser, IdentityRole>()
 			//    .AddEntityFrameworkStores<ApplicationDbContext>()

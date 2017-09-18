@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace EFMongoDemo.Tests
+namespace EFMongoDemo.Tests.DataTests
 {
 	public class DbInstance<T> where T : DbContext
 	{

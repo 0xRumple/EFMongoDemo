@@ -1,4 +1,6 @@
-﻿using EFMongoDemo.Core.Models.Entity;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using EFMongoDemo.Core.Models.Entity;
+using MongoDB.Bson;
 
 namespace EFMongoDemo.Core.Models
 {
@@ -6,12 +8,15 @@ namespace EFMongoDemo.Core.Models
 	{
 		public Car()
 		{
-			Owner = new Employee();
+			Id = ObjectId.GenerateNewId().ToString();
+			//Owner = new Employee();
 		}
 		public string Id { get; set; }
 		public string Model { get; set; }
 		public int Price { get; set; }
 		//public ICollection<Owner> Owners { get; set; }
-		public Employee Owner { get; set; }
+		public string OwnerId { get; set; }
+		[NotMapped]
+		public IOwner Owner { get; set; }
 	}
 }

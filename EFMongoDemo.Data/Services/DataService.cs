@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using EFMongoDemo.Core.Models.Entity;
 using Microsoft.EntityFrameworkCore;
-using MongoDB.Bson;
 
 namespace EFMongoDemo.Data.Services
 {
@@ -29,17 +28,10 @@ namespace EFMongoDemo.Data.Services
 			return entity;
 		}
 
-		/// <summary>
-		/// Get entity by id
-		/// </summary>
-		/// <param name="id">string id type</param>
-		/// <returns></returns>
-		public virtual async Task<TEntity> GetById(string id)
+		public virtual async Task<TEntity> GetById(TId id)
 		{
-			TEntity result = null;
-
-			result = await DbSet
-				.SingleOrDefaultAsync(m => m.Id as string == id);
+			TEntity result = await DbSet
+				.SingleOrDefaultAsync(m => EqualityComparer<TId>.Default.Equals(m.Id, id));
 
 			return result;
 			//return await _dbSet.FindAsync(id);
@@ -53,14 +45,14 @@ namespace EFMongoDemo.Data.Services
 			return entity;
 		}
 
-		public virtual async Task Delete(string id)
+		public virtual async Task Delete(TId id)
 		{
 			var entity = await GetById(id);
 			DbSet.Remove(entity);
 			await CommitChanges();
 		}
 
-		public virtual async Task<bool> EntityExists(string entityId)
+		public virtual async Task<bool> EntityExists(TId entityId)
 		{
 			var result = await GetById(entityId) != null;
 			return result;
@@ -74,5 +66,4 @@ namespace EFMongoDemo.Data.Services
 		internal readonly EFMongoDemoDbContext Context;
 		internal readonly DbSet<TEntity> DbSet;
 	}
-
 }

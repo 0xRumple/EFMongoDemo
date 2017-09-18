@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Blueshift.EntityFrameworkCore.MongoDB" Version="2.0.0-preview-t0050c6393" />
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="2.0.0" />
   </ItemGroup>
 

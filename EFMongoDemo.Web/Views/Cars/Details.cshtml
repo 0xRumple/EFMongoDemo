@@ -1,4 +1,4 @@
-﻿@model EFMongoDemo.Core.Models.Car
+﻿@model EFMongoDemo.Web.ViewModels.CarViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -21,6 +21,12 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OwnerName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OwnerName)
         </dd>
     </dl>
 </div>

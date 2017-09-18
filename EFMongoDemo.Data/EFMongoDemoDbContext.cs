@@ -41,8 +41,6 @@ namespace EFMongoDemo.Data
 		}
 
 		public DbSet<Car> Cars { get; set; }
-
-		public DbSet<Employee> Owners { get; set; }
-
+		public DbSet<Owner> Owners { get; set; }
 	}
 }
