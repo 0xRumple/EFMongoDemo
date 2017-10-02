@@ -1,4 +1,5 @@
-﻿using EFMongoDemo.Core.Models;
+﻿using System.Threading.Tasks;
+using EFMongoDemo.Core.Models;
 
 namespace EFMongoDemo.Data.Services
 {
@@ -6,6 +7,14 @@ namespace EFMongoDemo.Data.Services
 	{
 		public OwnerRepository(EFMongoDemoDbContext context) : base(context)
 		{
+		}
+
+		public override async Task<Owner> Add(Owner entity)
+		{
+			Context.Users.Add(entity);
+			await CommitChanges();
+
+			return entity;
 		}
 	}
 }

@@ -1,7 +1,9 @@
-﻿using EFMongoDemo.Data;
+﻿using EFMongoDemo.Core.Models;
+using EFMongoDemo.Data;
 using EFMongoDemo.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,18 +30,26 @@ namespace EFMongoDemo.Web
 		        .AddMvc(options => options.ModelBinderProviders.Insert(0, new ObjectIdBinderProvider()))
 		        .AddJsonOptions(options => options.SerializerSettings.Converters.Add(new ObjectIdJsonConverter()));
 
-			//services.AddIdentity<ApplicationUser, IdentityRole>()
-			//    .AddEntityFrameworkStores<ApplicationDbContext>()
-			//    .AddDefaultTokenProviders();
+	        services.AddIdentity<Owner, IdentityRole>(options =>
+		        {
+			        options.User.RequireUniqueEmail = true;
+			        options.Password.RequireDigit = false;
+			        options.Password.RequireLowercase = false;
+			        options.Password.RequireUppercase = false;
+			        options.Password.RequireNonAlphanumeric = false;
+			        options.Password.RequiredLength = 6;
+		        }).AddEntityFrameworkStores<EFMongoDemoDbContext>();
 
 			// Add application services.
 			services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddMvc();
-        }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+	        //services.AddTransient<EFMongoDemoSeedDate>();
+		}
+
+		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -62,6 +72,9 @@ namespace EFMongoDemo.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-        }
+
+	        //seeder.ClearDatabase().Wait();
+	        //seeder.EnsureSeedData().Wait();
+		}
     }
 }

@@ -1,5 +1,7 @@
-﻿@using EFMongoDemo.Web.Views.Manage
-@inject SignInManager<ApplicationUser> SignInManager
+﻿@using EFMongoDemo.Core.Models
+@using EFMongoDemo.Web.Views.Manage
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<Owner> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }

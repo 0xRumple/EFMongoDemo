@@ -1,15 +1,18 @@
-﻿using MongoDB.Bson;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace EFMongoDemo.Core.Models
 {
-	public class Owner : IOwner
+	//[BsonKnownTypes(typeof(Employee), typeof(Manager))]
+	public class Owner : IdentityUser, IOwner
 	{
-		protected Owner()
+
+		public Owner()
 		{
-			Id = ObjectId.GenerateNewId().ToString();
+			//Id = ObjectId.GenerateNewId().ToString();
 			Name = "";
 		}
-		public string Id { get; set; }
+		//[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		//public string Id { get; set; }
 		public string Name { get; set; }
 		public virtual string GetTypeString()
 		{

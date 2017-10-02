@@ -1,12 +1,13 @@
 ﻿using Blueshift.EntityFrameworkCore.MongoDB.Annotations;
 using EFMongoDemo.Core.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
 
 namespace EFMongoDemo.Data
 {
 	[MongoDatabase("carsDb")]
-	public class EFMongoDemoDbContext : DbContext
+	public class EFMongoDemoDbContext : IdentityDbContext<Owner>
 	{
 		public EFMongoDemoDbContext(DbContextOptions<EFMongoDemoDbContext> options)
 			: base((DbContextOptions) options)
@@ -29,18 +30,16 @@ namespace EFMongoDemo.Data
 			//optionsBuilder.UseMongoDb(settings);
 
 			MongoClient mongoClient = new MongoClient(settings);
+
 			optionsBuilder.UseMongoDb(mongoClient);
 		}
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
 			base.OnModelCreating(builder);
-			// Customize the ASP.NET Identity model and override the defaults if needed.
-			// For example, you can rename the ASP.NET Identity table names and more.
-			// Add your customizations after calling base.OnModelCreating(builder);
 		}
 
 		public DbSet<Car> Cars { get; set; }
-		public DbSet<Owner> Owners { get; set; }
+		//public DbSet<Owner> Owners { get; set; }
 	}
 }

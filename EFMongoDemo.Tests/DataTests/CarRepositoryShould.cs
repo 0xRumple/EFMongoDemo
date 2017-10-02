@@ -16,7 +16,7 @@ namespace EFMongoDemo.Tests.DataTests
 		    var context = _db.NewContext();
 		    var myObjId = ObjectId.GenerateNewId();
 		    var employeeName = "John";
-			var car = new Car {Id = myObjId.ToString(), Owner = new Employee{Name = employeeName } };
+			var car = new Car {Id = myObjId.ToString(), Owner = new Owner{Name = employeeName } };
 		    var carRepo = new CarRepository(context);
 
 		    await carRepo.Add(car);

@@ -16,7 +16,7 @@ namespace EFMongoDemo.Data.Services
 		{
 			var result = await (
 					from car in DbSet
-					join owner in Context.Owners on car.OwnerId equals owner.Id
+					join owner in Context.Users on car.OwnerId equals owner.Id
 					select new Car
 					{
 						Id = car.Id,
@@ -43,10 +43,7 @@ namespace EFMongoDemo.Data.Services
 
 		public override async Task<Car> Add(Car car)
 		{
-			var owner = new Employee
-			{
-				Name = car.Owner.Name
-			};
+			var owner = car.Owner as Owner;
 			var ownerRepo = new OwnerRepository(Context);
 			await ownerRepo.Add(owner);
 			car.OwnerId = owner.Id;
@@ -59,7 +56,7 @@ namespace EFMongoDemo.Data.Services
 			var result = await (
 				from car in DbSet
 				where car.Id == id
-				join owner in Context.Owners on car.OwnerId equals owner.Id
+				join owner in Context.Users on car.OwnerId equals owner.Id
 				select new Car
 				{
 					Id = car.Id,
