@@ -16,7 +16,7 @@ namespace EFMongoDemo.Core.Models
 		public int Price { get; set; }
 		//public ICollection<Owner> Owners { get; set; }
 		public string OwnerId { get; set; }
-		[NotMapped]
-		public IOwner Owner { get; set; }
+		//[NotMapped]
+		public Owner Owner { get; set; }
 	}
 }

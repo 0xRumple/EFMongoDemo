@@ -15,7 +15,7 @@ namespace EFMongoDemo.Web.Extensions
 		//	return result;
 		//}
 
-	    public static OwnerUpdateViewModel ToViewModel(this IOwner owner)
+	    public static OwnerUpdateViewModel ToViewModel(this Owner owner)
 	    {
 		    var result = new OwnerUpdateViewModel
 		    {
@@ -26,14 +26,14 @@ namespace EFMongoDemo.Web.Extensions
 			return result;
 	    }
 
-	    public static IOwner MapViewModel(this IOwner owner, OwnerUpdateViewModel ownerUpdateViewModel)
+	    public static Owner UpdateFromViewModel(this Owner owner, OwnerUpdateViewModel ownerUpdateViewModel)
 	    {
 			var newOwnerType = OwnerHelper.GetOwner(ownerUpdateViewModel.OwnerTypeString);
 		    if (newOwnerType.GetType() != owner.GetType())
 		    {
 			    var tempOwner = owner;
-			    owner = newOwnerType;
-			    owner.Id = tempOwner.Id;
+			    //owner = newOwnerType;
+			    //owner.Id = tempOwner.Id;
 		    }
 			owner.Name = ownerUpdateViewModel.OwnerName;
 

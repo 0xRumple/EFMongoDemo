@@ -8,11 +8,11 @@ using EFMongoDemo.Web.Extensions;
 
 namespace EFMongoDemo.Web.Controllers
 {
-	public class CarsController : Controller
+	public class CarController : Controller
 	{
 		private readonly CarRepository _carRepo;
 
-		public CarsController(EFMongoDemoDbContext context)
+		public CarController(EFMongoDemoDbContext context)
 		{
 			_carRepo = new CarRepository(context);
 		}
@@ -20,12 +20,11 @@ namespace EFMongoDemo.Web.Controllers
 		// GET: Cars
 		public async Task<IActionResult> Index()
 		{
-			var cars = await _carRepo.GetAll();
+			var cars = await _carRepo.GetAll().ToListAsync();
 
 			//var owner = cars[0].Owner;
 
 			return View(cars);
-			//return View(await _context.Cars.ToListAsync());
 		}
 
 		// GET: Cars/Details/5
@@ -52,9 +51,6 @@ namespace EFMongoDemo.Web.Controllers
 			return View();
 		}
 
-		// POST: Cars/Create
-		// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Create(CarViewModel carViewModel)
@@ -86,15 +82,10 @@ namespace EFMongoDemo.Web.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Edit(string id, CarViewModel carViewModel)
 		{
-			//if (id != car.Id)
-			//{
-			//    return NotFound();
-			//}
-
 			if (ModelState.IsValid)
 			{
 				var car = await _carRepo.GetById(id);
-				car = car.MapViewModel(carViewModel);
+				car = car.UpdateFromViewModel(carViewModel);
 
 				try
 				{

@@ -1,6 +1,4 @@
 ﻿using Blueshift.Identity.MongoDB;
-using Microsoft.AspNetCore.Identity;
-using MongoDB.Driver;
 
 namespace EFMongoDemo.Core.Models
 {
@@ -14,11 +12,10 @@ namespace EFMongoDemo.Core.Models
 			Name = "";
 		}
 		//[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public new string Id
-		{
-			get { return base.Id.ToString(); }
-			set { }
-		}
+		//public new string Id
+		//{
+		//	get { return base.Id.ToString(); }
+		//}
 
 		public string Name { get; set; }
 		public virtual string GetTypeString()

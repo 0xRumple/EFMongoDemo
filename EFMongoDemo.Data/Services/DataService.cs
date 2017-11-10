@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using EFMongoDemo.Core.Models.Entity;
 using Microsoft.EntityFrameworkCore;
@@ -14,9 +15,9 @@ namespace EFMongoDemo.Data.Services
 			DbSet = Context.Set<TEntity>();
 		}
 
-		public virtual async Task<List<TEntity>> GetAll()
+		public virtual IQueryable<TEntity> GetAll()
 		{
-			return await DbSet.ToListAsync();
+			return DbSet.AsQueryable();
 		}
 
 		public virtual async Task<TEntity> Add(TEntity entity)

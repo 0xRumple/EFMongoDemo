@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
+using EFMongoDemo.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using EFMongoDemo.Core.Models;
 using EFMongoDemo.Data;
 using EFMongoDemo.Data.Services;
 using EFMongoDemo.Web.Extensions;
@@ -72,7 +72,7 @@ namespace EFMongoDemo.Web.Controllers
 			if (ModelState.IsValid)
 			{
 				var car = await _carRepo.GetById(id);
-				car.Owner = car.Owner.MapViewModel(ownerUpdateViewModel);
+				car.Owner = car.Owner.UpdateFromViewModel(ownerUpdateViewModel) as Owner;
 
 				try
 				{
@@ -89,7 +89,7 @@ namespace EFMongoDemo.Web.Controllers
 						throw;
 					}
 				}
-				return RedirectToAction(nameof(Index), ControllerHelper.UrlName(nameof(CarsController)));
+				return RedirectToAction(nameof(Index), ControllerHelper.UrlName(nameof(CarController)));
 			}
 
 			return View(ownerUpdateViewModel);

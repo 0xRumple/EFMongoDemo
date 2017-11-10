@@ -1,7 +1,7 @@
 namespace EFMongoDemo.Core.Models.Entity
 {
-	public interface IEntity<TId>
+	public interface IEntity<out TId>
 	{
-		TId Id { get; set; }
+		TId Id { get; }
 	}
 }

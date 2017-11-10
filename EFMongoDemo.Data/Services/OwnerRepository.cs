@@ -4,7 +4,7 @@ using MongoDB.Bson;
 
 namespace EFMongoDemo.Data.Services
 {
-    public class OwnerRepository : DataService<Owner, string>
+	public class OwnerRepository : DataService<Owner, ObjectId>
 	{
 		public OwnerRepository(EFMongoDemoDbContext context) : base(context)
 		{
