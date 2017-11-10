@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Blueshift.Identity.MongoDB;
+using Microsoft.AspNetCore.Identity;
+using MongoDB.Driver;
 
 namespace EFMongoDemo.Core.Models
 {
 	//[BsonKnownTypes(typeof(Employee), typeof(Manager))]
-	public class Owner : IdentityUser, IOwner
+	public class Owner : MongoDbIdentityUser, IOwner
 	{
 
 		public Owner()
@@ -12,7 +14,12 @@ namespace EFMongoDemo.Core.Models
 			Name = "";
 		}
 		//[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		//public string Id { get; set; }
+		public new string Id
+		{
+			get { return base.Id.ToString(); }
+			set { }
+		}
+
 		public string Name { get; set; }
 		public virtual string GetTypeString()
 		{

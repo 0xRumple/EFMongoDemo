@@ -20,9 +20,4 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\EFMongoDemo.Core\EFMongoDemo.Core.csproj" />
-    <ProjectReference Include="..\EFMongoDemo.Data\EFMongoDemo.Data.csproj" />
-  </ItemGroup>
-
 </Project>

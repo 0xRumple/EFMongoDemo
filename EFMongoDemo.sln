@@ -5,11 +5,16 @@ VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFMongoDemo.Web", "EFMongoDemo.Web\EFMongoDemo.Web.csproj", "{93EE391C-9883-48C3-9AD8-BA1FE1B0A037}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFMongoDemo.Core", "EFMongoDemo.Core\EFMongoDemo.Core.csproj", "{1EABC622-4347-4B32-AA64-FFB2BCCD12A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFMongoDemo.Core", "EFMongoDemo.Core\EFMongoDemo.Core.csproj", "{1EABC622-4347-4B32-AA64-FFB2BCCD12A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFMongoDemo.Data", "EFMongoDemo.Data\EFMongoDemo.Data.csproj", "{C53553A7-B323-4540-8F70-39D11B1CFF78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFMongoDemo.Data", "EFMongoDemo.Data\EFMongoDemo.Data.csproj", "{C53553A7-B323-4540-8F70-39D11B1CFF78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFMongoDemo.Tests", "EFMongoDemo.Tests\EFMongoDemo.Tests.csproj", "{24E295CD-4678-4EBA-A07A-DA01BDC0CF5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFMongoDemo.Tests", "EFMongoDemo.Tests\EFMongoDemo.Tests.csproj", "{24E295CD-4678-4EBA-A07A-DA01BDC0CF5D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Globals", "Globals", "{B851EFE1-2B47-45D4-A7D0-E30E033B8626}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet.config = NuGet.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

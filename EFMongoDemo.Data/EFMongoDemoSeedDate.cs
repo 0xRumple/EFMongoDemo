@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Blueshift.Identity.MongoDB;
 using EFMongoDemo.Core.Enums;
 using EFMongoDemo.Core.Models;
 using Microsoft.AspNetCore.Identity;
@@ -12,7 +13,7 @@ namespace EFMongoDemo.Data
 	{
 		public EFMongoDemoSeedDate(EFMongoDemoDbContext context,
 									UserManager<Owner> userManager,
-									RoleManager<IdentityRole> roleManager)
+									RoleManager<MongoDbIdentityRole> roleManager)
 		{
 			_context = context;
 			_userManager = userManager;
@@ -22,12 +23,12 @@ namespace EFMongoDemo.Data
 		public async Task ClearDatabase()
 		{
 			await Clear(_context.Users);
-			await Clear(_context.UserClaims);
-			await Clear(_context.UserLogins);
-			await Clear(_context.UserRoles);
-			await Clear(_context.UserTokens);
+			//await Clear(_context.UserClaims);
+			//await Clear(_context.UserLogins);
+			//await Clear(_context.UserRoles);
+			//await Clear(_context.UserTokens);
 			await Clear(_context.Roles);
-			await Clear(_context.RoleClaims);
+			//await Clear(_context.RoleClaims);
 			await Clear(_context.Cars);
 			//await Clear(_context.Owners);
 			await _context.SaveChangesAsync();
@@ -61,7 +62,7 @@ namespace EFMongoDemo.Data
 
 		private readonly EFMongoDemoDbContext _context;
 		private readonly UserManager<Owner> _userManager;
-		private readonly RoleManager<IdentityRole> _roleManager;
+		private readonly RoleManager<MongoDbIdentityRole> _roleManager;
 
 	}
 }

@@ -1,4 +1,5 @@
-﻿using EFMongoDemo.Core.Models;
+﻿using Blueshift.Identity.MongoDB;
+using EFMongoDemo.Core.Models;
 using EFMongoDemo.Data;
 using EFMongoDemo.Web.Services;
 using Microsoft.AspNetCore.Builder;
@@ -30,15 +31,17 @@ namespace EFMongoDemo.Web
 		        .AddMvc(options => options.ModelBinderProviders.Insert(0, new ObjectIdBinderProvider()))
 		        .AddJsonOptions(options => options.SerializerSettings.Converters.Add(new ObjectIdJsonConverter()));
 
-	        services.AddIdentity<Owner, IdentityRole>(options =>
-		        {
-			        options.User.RequireUniqueEmail = true;
-			        options.Password.RequireDigit = false;
-			        options.Password.RequireLowercase = false;
-			        options.Password.RequireUppercase = false;
-			        options.Password.RequireNonAlphanumeric = false;
-			        options.Password.RequiredLength = 6;
-		        }).AddEntityFrameworkStores<EFMongoDemoDbContext>();
+	        services.AddIdentity<Owner, MongoDbIdentityRole>(
+				options =>
+				{
+					options.User.RequireUniqueEmail = true;
+					options.Password.RequireDigit = false;
+					options.Password.RequireLowercase = false;
+					options.Password.RequireUppercase = false;
+					options.Password.RequireNonAlphanumeric = false;
+					options.Password.RequiredLength = 6;
+				}
+				).AddEntityFrameworkMongoDbStores<EFMongoDemoDbContext>();
 
 			// Add application services.
 			services.AddTransient<IEmailSender, EmailSender>();

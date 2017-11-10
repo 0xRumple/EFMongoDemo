@@ -1,13 +1,13 @@
 ﻿using Blueshift.EntityFrameworkCore.MongoDB.Annotations;
+using Blueshift.Identity.MongoDB;
 using EFMongoDemo.Core.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
 
 namespace EFMongoDemo.Data
 {
 	[MongoDatabase("carsDb")]
-	public class EFMongoDemoDbContext : IdentityDbContext<Owner>
+	public class EFMongoDemoDbContext : IdentityMongoDbContext
 	{
 		public EFMongoDemoDbContext(DbContextOptions<EFMongoDemoDbContext> options)
 			: base((DbContextOptions) options)
@@ -40,6 +40,6 @@ namespace EFMongoDemo.Data
 		}
 
 		public DbSet<Car> Cars { get; set; }
-		//public DbSet<Owner> Owners { get; set; }
+		public DbSet<Owner> Owners { get; set; }
 	}
 }

@@ -16,7 +16,7 @@ namespace EFMongoDemo.Data.Services
 		{
 			var result = await (
 					from car in DbSet
-					join owner in Context.Users on car.OwnerId equals owner.Id
+					join owner in Context.Owners on car.OwnerId equals owner.Id
 					select new Car
 					{
 						Id = car.Id,
@@ -56,7 +56,7 @@ namespace EFMongoDemo.Data.Services
 			var result = await (
 				from car in DbSet
 				where car.Id == id
-				join owner in Context.Users on car.OwnerId equals owner.Id
+				join owner in Context.Owners on car.OwnerId equals owner.Id
 				select new Car
 				{
 					Id = car.Id,

@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using EFMongoDemo.Core.Models;
+using MongoDB.Bson;
 
 namespace EFMongoDemo.Data.Services
 {
@@ -11,7 +12,7 @@ namespace EFMongoDemo.Data.Services
 
 		public override async Task<Owner> Add(Owner entity)
 		{
-			Context.Users.Add(entity);
+			Context.Owners.Add(entity);
 			await CommitChanges();
 
 			return entity;
